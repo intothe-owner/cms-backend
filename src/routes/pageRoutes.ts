@@ -23,6 +23,7 @@ router.get('/', async (req: Request, res: Response) => {
 router.get('/:id', async (req: Request, res: Response) => {
   try {
     const param = req.params.id;
+
     
     // 💡 param이 "0"인 경우(메인 페이지) 처리
     if (param === "0") {
@@ -40,10 +41,13 @@ router.get('/:id', async (req: Request, res: Response) => {
       const menu = await Menu.findByPk(Number(param));
       if (menu) menuIds.push((menu as any).id);
     } else {
-      const searchUrl = `/${param}`;
+      //const searchUrl = `/${param}`;
+      const searchUrl = `/page?id=${param}`;
+      console.log(searchUrl);
       const menus = await Menu.findAll({ where: { url: searchUrl } });
       menuIds = menus.map((m: any) => m.id);
     }
+    console.log(menuIds);
 
     if (menuIds.length === 0) {
       return res.status(404).json({ success: false, message: '메뉴를 찾을 수 없습니다.' });

@@ -5,3 +5,4 @@ out/
 .env.production
 .DS_Store
 public
+dist
