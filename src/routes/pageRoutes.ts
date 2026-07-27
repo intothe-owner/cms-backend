@@ -41,8 +41,8 @@ router.get('/:id', async (req: Request, res: Response) => {
       const menu = await Menu.findByPk(Number(param));
       if (menu) menuIds.push((menu as any).id);
     } else {
-      //const searchUrl = `/${param}`;
-      const searchUrl = `/page?id=${param}`;
+      const searchUrl = `/${param}`;
+      //const searchUrl = `/page?id=${param}`;
       console.log(searchUrl);
       const menus = await Menu.findAll({ where: { url: searchUrl } });
       menuIds = menus.map((m: any) => m.id);
